@@ -6,7 +6,7 @@ import telebot
 from datetime import date ,timedelta ,time
 import time 
 
-app=Client(
+app=Client('jjjj',
 	ssss=Config.APP_ID,
 	bot_token=Config.TG_BOT_TOKEN,
 )
