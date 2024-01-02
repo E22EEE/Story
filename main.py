@@ -12,12 +12,8 @@ import telebot
 from datetime import date ,timedelta ,time
 import time 
 ssss = '5154904380'
-app = Client(
-    "Story",
-    api_id=Config.APP_ID,
-    api_hash=Config.API_HASH,)
-TELEGRAM_TOKEN=Config.TG_BOT_TOKEN
-bot = telebot.TeleBot(TELEGRAM_TOKEN)
+tokz=Config.TG_BOT_TOKEN
+bot = telebot.TeleBot(tokz)
 p3 = types.InlineKeyboardMarkup()
 p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
 A1 = types.InlineKeyboardButton(text = "اوامر الحماية .",callback_data="A1")
