@@ -13,7 +13,7 @@ from datetime import date ,timedelta ,time
 import time 
 ssss = '5154904380'
 app = Client(
-    "Views",
+    "Story",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,)
 TELEGRAM_TOKEN=Config.TG_BOT_TOKEN
