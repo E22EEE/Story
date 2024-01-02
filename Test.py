@@ -5,8 +5,6 @@ import telebot
 from datetime import date ,timedelta ,time
 import time 
 ssss = '5154904380'
-App = app()
-os.environ['SSL_CERT_FILE'] = certifi.where() 
 api_id = Config.APP_ID
 api_hash = Config.API_HASH
 TELEGRAM_TOKEN=Config.TG_BOT_TOKEN
