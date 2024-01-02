@@ -1,1 +1,1 @@
-worker: bash Erauyo.py
+worker: bash main.py
