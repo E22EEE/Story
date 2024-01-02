@@ -6,7 +6,7 @@ import telebot
 from datetime import date ,timedelta ,time
 import time 
 
-ssss=Config.APP_ID
+ssss= '5154904380'
 bot_token=Config.TG_BOT_TOKEN
 
 bot = telebot.TeleBot(bot_token)
