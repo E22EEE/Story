@@ -11,13 +11,9 @@ import random
 import telebot
 from datetime import date ,timedelta ,time
 import time 
-ssss = '5024278507'
-app = Client(
-    "Views",
-    api_id=Config.APP_ID,
-    api_hash=Config.API_HASH,
-    bot = Config.TG_BOT_TOKEN 
-)
+ssss = '5154904380'
+tokz=Config.TG_BOT_TOKEN 
+bot = telebot.TeleBot(tokz)
 p3 = types.InlineKeyboardMarkup()
 p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
 A1 = types.InlineKeyboardButton(text = "اوامر الحماية .",callback_data="A1")
@@ -25,7 +21,7 @@ A2 = types.InlineKeyboardButton(text = "اوامر التسلية .",callback_da
 A3 = types.InlineKeyboardButton(text = "اوامر الالعاب .",callback_data="A3")
 A4 = types.InlineKeyboardButton(text = "اوامر الموسيقى ",callback_data="A4")
 
-@app.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
   f2 = message.from_user.first_name 
   t2 = message.from_user.username 
@@ -263,7 +259,7 @@ pm = ["ع اساس شلونه،",
 "عبود الحكللي روحي طاحت من السيرفر 😱"]
 
 	
-@app.message_handler(content_types=['text'])
+@bot.message_handler(content_types=['text'])
 def start(message):
 	#if 'http' in message.text:
 #		bot.delete_message(id,messagesid)
@@ -621,7 +617,7 @@ CH - @PJPPPPPP : @BBANND*""",parse_mode="markdown",reply_to_message_id=message.m
 	    	bot.reply_to(message,f"""*{r}
 - - - - - - - - - - - - - 
 @Tuupacbot*""",parse_mode="markdown",reply_markup=p3)
-@app.callback_query_handler(func= lambda call : True)
+@bot.callback_query_handler(func= lambda call : True)
 def callback_data(call):
   
   if call.data == "c2":
