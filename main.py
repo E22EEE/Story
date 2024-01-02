@@ -6,10 +6,9 @@ import telebot
 from datetime import date ,timedelta ,time
 import time 
 
-app=Client('jjjj',
-	ssss=Config.APP_ID,
-	bot_token=Config.TG_BOT_TOKEN,
-)
+ssss=Config.APP_ID
+bot_token=Config.TG_BOT_TOKEN
+
 bot = telebot.TeleBot(bot_token)
 p3 = types.InlineKeyboardMarkup()
 p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
