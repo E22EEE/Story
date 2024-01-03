@@ -5,3 +5,4 @@ telethon
 pyromod
 pyshorteners
 telebot
+kvsqlite
