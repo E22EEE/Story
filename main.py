@@ -3,7 +3,7 @@
 #قم بوضع يوزر البوت بدون @ في سطر 27
 
 
-
+from config import Config 
 import os
 from telethon import TelegramClient, events, functions, types, Button
 from datetime import timedelta
