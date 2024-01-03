@@ -6,3 +6,4 @@ pyromod
 pyshorteners
 telebot
 kvsqlite
+logging
