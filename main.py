@@ -1,12 +1,13 @@
 from config import Config
 from pyrogram import Client, filters
 
-app = Client('my_acount',api_id=Config.APP_ID,
-    api_hash=Config.API_HASH,"")
+app = Client('my_acount',
+	     api_id=Config.APP_ID,
+	     api_hash=Config.API_HASH,)
 
 """***---******---******---******---******---******---******---******---******---******---***"""
 
-id = 5154904380
+id = 6549245259
 ch = -1001198143769
 yes = ["no"]
 """***---******---******---******---******---******---******---******---******---******---***"""
