@@ -2,3 +2,4 @@ pyrogram
 requests
 asyncio
 telethon
+pyromod
