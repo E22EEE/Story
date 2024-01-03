@@ -1,7 +1,7 @@
 from config import Config
 import logging
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # تعيين توكن البوت الخاص بك
 TOKEN = '6975900549:AAFzUwKhmsXFMr9DYe8QusTtKv_3F4slvTE'
