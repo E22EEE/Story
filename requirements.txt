@@ -4,3 +4,4 @@ asyncio
 telethon
 pyromod
 pyshorteners
+telebot
