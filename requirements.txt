@@ -1,4 +1,4 @@
 pyrogram
 requests
 asyncio
-telebot
+telethon
