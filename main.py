@@ -4,7 +4,7 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler
 
 # تعيين توكن البوت الخاص بك
-TOKEN = Config.TG_BOT_TOKEN
+TOKEN = '6975900549:AAFzUwKhmsXFMr9DYe8QusTtKv_3F4slvTE'
 # تعيين معرف القناة المصدر
 SOURCE_CHANNEL = '@aeo_n'
 # تعيين معرف القناة الهدف
