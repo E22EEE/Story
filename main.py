@@ -46,7 +46,7 @@ async def CHECK_USER_JOIN(api_key, channls_join: list, user_id : int):
             return r,c
     return r,c
 
-API_KEY = '5288347532:AAE5n7Yhx9zClkHO_ptVR2Y6Fv3u2OtEJGA'
+API_KEY = Config.TG_BOT_TOKEN
 BOT_CHANNL = ['uaiuu']
 app = Client(
     'rad',
