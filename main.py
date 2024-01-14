@@ -8,7 +8,7 @@ import asyncio
 # bot helpers 
 BOT_MESSAGE = {
     'JOIN_CHANLL':
-                u'⦁ عذراً عليك الاشتراك في قناة البوت اولاً 🌵.\n⦁ رآبط القناة : @{}'
+                u'⦁ عذراً عزيزي عليك الاشتراك في قناة البوت اولاً 🌵.\n⦁ رآبط القناة : @{}'
                 u'',
     'DONE_JOIN_CHANNL':
                     u'تم التحقق من الاشتراك ✅ \n ارسل /start'
@@ -18,13 +18,7 @@ BOT_MESSAGE = {
 def CHECK_JOIN_KEYBOARD(Channl: str):
     return types.InlineKeyboardMarkup([
         [
-            types.InlineKeyboardButton(text='⦁ GIF متحركات ملصقات تمبلر', url=f't.me/{Channl}'),
-
-        ]
-    ])
-def CHECK_JOIN_KEYBOARD(Channl: str):
-    return types.InlineKeyboardMarkup([
-        [
+            types.InlineKeyboardButton(text='⦁ القناة ⦁', url=f't.me/{Channl}'),
             types.InlineKeyboardButton(text='تحقق ♻️', callback_data='checkjoin')
         ]
     ])
