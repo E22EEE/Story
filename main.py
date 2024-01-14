@@ -1,29 +1,31 @@
 from config import Config
+
 from pyrogram import Client, filters, types 
 from requests import get
 import json
 import asyncio 
 
-
+# bot helpers 
 BOT_MESSAGE = {
     'JOIN_CHANLL':
-                u'عذرن عزيزي عليك الاشترك بي قناة البوت اولان لي استخدام البوت 🧩💬.'
-                u'\n\n Channl : @{} 💭🔰.'
-                u'\n\n  👇 قم بي الاشترك من ثم اضغط علا زر تحقق 🔱🔗 .'
+                u'⦁ عذراً عليك الاشتراك في قناة البوت اولاً 🌵.\n⦁ رآبط القناة : @{}'
                 u'',
     'DONE_JOIN_CHANNL':
-                    u'شكرأ لك على الاشتراك في قنات البوت 〽️🧩.'
-                    u'\n\n الان فم بي ارسال ( /start ) لي تشغيل البوت ♻️🔱.'
-                    u'\n\n اتمنة لك تجربا ممتعة ✅🤍'
-                    u'\n معا تحيات 𝗗𝗘𝗩 RAD - @R_AFX 💬👨‍💻'
+                    u'تم التحقق من الاشتراك ✅ \n ارسل /start'
                     u''
 }
 
 def CHECK_JOIN_KEYBOARD(Channl: str):
     return types.InlineKeyboardMarkup([
         [
-            types.InlineKeyboardButton(text='قناة البوت 〽️💭.', url=f't.me/{Channl}'),
-            types.InlineKeyboardButton(text='تحقق ♻️.', callback_data='checkjoin')
+            types.InlineKeyboardButton(text='⦁ GIF متحركات ملصقات تمبلر', url=f't.me/{Channl}'),
+
+        ]
+    ])
+def CHECK_JOIN_KEYBOARD(Channl: str):
+    return types.InlineKeyboardMarkup([
+        [
+            types.InlineKeyboardButton(text='تحقق ♻️', callback_data='checkjoin')
         ]
     ])
 def REDRESH_LANSHER(text: str):
@@ -66,17 +68,17 @@ async def START_BOT(_, message: types.Message):
     if not join_:
         await app.send_message(chat_id=chat_id, text=BOT_MESSAGE['JOIN_CHANLL'].format(channl), reply_markup=CHECK_JOIN_KEYBOARD(channl))
         return 
-    await app.send_message(chat_id, 'Welcome to bot .')
+    await app.send_message(chat_id, '- ياهلا حياك 🌵.\n⦁ قناة البوت : @uaiuu .\n⦁ مطور البوت : @zEezzz .')
 
 
 @app.on_callback_query(filters.regex('^checkjoin$'))
 async def CHAECK_JOIN(_, query: types.CallbackQuery):
-    await app.edit_message_text(text='انتضر جاري التحقق من الاشتراك ⚙️.', reply_markup=REDRESH_LANSHER('تحقق من الاشتراك♻️⚙️.'), chat_id=query.message.chat.id, message_id=query.message.id)
+    await app.edit_message_text(text='انتظر قليلاً .', reply_markup=REDRESH_LANSHER('تحقق ♻️'), chat_id=query.message.chat.id, message_id=query.message.id)
     await asyncio.sleep(0.3)
     join_, channl = await CHECK_USER_JOIN(API_KEY, BOT_CHANNL, query.from_user.id)
     if not join_:
         await app.edit_message_text(text=BOT_MESSAGE['JOIN_CHANLL'].format(channl), reply_markup=CHECK_JOIN_KEYBOARD(channl) ,chat_id= query.message.chat.id, message_id=query.message.id)    
-        await app.answer_callback_query(query.id, 'تأكد من اشتراك في القناة و اعد المحاولا ✅〽️.', show_alert=True)  
+        await app.answer_callback_query(query.id, '❌ تأكد من الاشتراك في القناة و اعد النحاولة ❌.', show_alert=True)  
         return
     await app.edit_message_text(text=BOT_MESSAGE['DONE_JOIN_CHANNL'], chat_id= query.message.chat.id, message_id=query.message.id)
 
