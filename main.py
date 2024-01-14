@@ -1,59 +1,25 @@
 from config import Config
-import logging
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-
-# تعيين توكن البوت الخاص بك
-TOKEN = '6975900549:AAFzUwKhmsXFMr9DYe8QusTtKv_3F4slvTE'
-# تعيين معرف القناة المصدر
-SOURCE_CHANNEL = '@aeo_n'
-# تعيين معرف القناة الهدف
-TARGET_CHANNEL = '@PBOOB'
-
-# تكوين السجل للحصول على سجل الأحداث
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                     level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# وظيفة التعامل مع أمر /start
-def start(update: Update, context):
-    update.message.reply_text('مرحبًا! أنا بوت نقل المنشورات من قناة لأخرى.')
-
-# وظيفة التعامل مع الرسائل النصية
-def text_message(update: Update, context):
-    # فقط نقل الرسالة إلى القناة الهدف
-    context.bot.forward_message(chat_id=TARGET_CHANNEL,
-                                from_chat_id=update.message.chat_id,
-                                message_id=update.message.message_id)
-
-# وظيفة التعامل مع الصور والفيديو والملفات
-def media_message(update: Update, context):
-    # فقط نقل الملف إلى القناة الهدف
-    context.bot.forward_message(chat_id=TARGET_CHANNEL,
-                                from_chat_id=update.message.chat_id,
-                                message_id=update.message.message_id)
-
-# وظيفة التشغيل الرئيسية
-def main():
-    # إعداد واجهة برمجة التطبيقات (API) للبوت
-    updater = Updater(token=TOKEN, use_context=True)
-    dispatcher = updater.dispatcher
-
-    # إضافة معالج الأوامر
-    start_handler = CommandHandler('start', start)
-    dispatcher.add_handler(start_handler)
-
-    # إضافة معالج الرسائل النصية
-    text_handler = MessageHandler(Filters.text & ~Filters.command, text_message)
-    dispatcher.add_handler(text_handler)
-
-    # إضافة معالج الرسائل المتعددة الوسائط
-    media_handler = MessageHandler(Filters.photo | Filters.video | Filters.document, media_message)
-    dispatcher.add_handler(media_handler)
-
-    # بدء البوت
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
+try:
+	import telebot
+	from telebot import types,TeleBot
+	import requests
+	from requests import post,get
+except ImportError as e:
+	print(e)
+bot = TeleBot("5288347532:AAE5n7Yhx9zClkHO_ptVR2Y6Fv3u2OtEJGA");
+User = "uaiuu";
+Id = -1001803422591
+@bot.message_handler(commands=["start"])
+def Start(message):
+	id = message.from_user.id
+	Req = requests.get(f"https://api.telegram.org/bot{bot}/getchatmember?chat_id=@{User}&user_id={id}").text
+	if id == User or 'member' in Req or 'creator' in Req or 'administartor':
+		bot.reply_to(message,'''*• اهلا وسهلا تم التحقق بأنك مشترك في قناة البوت ✅ .*''',parse_mode='Markdown')
+	else:
+			Key = types.InlineKeyboardMarkup(row_width=1)
+			Ch = types.InlineKeyboardButton("• اشترك الان",url=f"tg://user?id=-100{Id}")
+			Key.add(Ch)
+			bot.reply_to(message,f'''**• عزيزي عليك الاشتراك في قناة البوت لتتمكن من استخدامه ⁉️ | @{User} .**''',reply_markup=Key)
+bot.infinity_polling(True)
+# - - DeV CODE —> @A7aac
+#The CODe Is Not Test !.
