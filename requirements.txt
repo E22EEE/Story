@@ -1,9 +1,4 @@
-pyrogram
-requests
-asyncio
-telethon
-pyromod
-pyshorteners
 telebot
-kvsqlite
-python-telegram-bot
+websocket
+websocket-client
+names
